@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-
+import json 
 from .models import Product
 from datetime import datetime
 from django.views import generic
@@ -23,6 +23,18 @@ class HomePageView(TemplateView):
         datetime_NY = datetime.now(tz_NY)
         context['newyourk'] = datetime_NY.strftime("%m/%d/%Y, %H:%M:%S")
         context['calculation'] = str(8 + 7)
+        basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
+       
+        context['mybaskt'] = basket 
+        
+        x = '{ "name":"John", "age":30, "city":"New York"}'
+        y = json.loads(x)
+        
+        context['Name'] = y["name"].upper()
+        context['Age'] = y["age"] * 5
+        context['City'] = y["city"]
+      
+        # the result is a Python dictionary: print(y["age"])
         return context
     
     
